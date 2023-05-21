@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Button Click Example</title>
+  </head>
+  <body>
+    <form id="form">
+      <label for="usernameInput">Username:</label>
+      <input
+        type="text"
+        id="usernameInput"
+        name="username"
+        required
+      /><br /><br />
+
+      <label for="passwordInput">Password:</label>
+      <input
+        type="password"
+        id="passwordInput"
+        name="password"
+        required
+      /><br /><br />
+
+      <label for="businessLocationCountInput"
+        >Number of business locations:</label
+      >
+      <input
+        type="number"
+        id="businessLocationCountInput"
+        min="1"
+        placeholder="Enter number of locations"
+        required
+      /><br /><br />
+
+      <div id="businessLocationsContainer"></div>
+      <button id="myButton">Click me</button>
+    </form>
+    <script type="text/javascript" src="./xlsx.core.min.js"></script>
+
+    <script>
+      document
+        .getElementById("businessLocationCountInput")
+        .addEventListener("input", function () {
+          const count = parseInt(
+            document.getElementById("businessLocationCountInput").value,
+            10
+          );
+          const container = document.getElementById(
+            "businessLocationsContainer"
+          );
+
+          // Clear previous inputs
+          container.innerHTML = "";
+
+          // Generate new inputs
+          for (let i = 1; i <= count; i++) {
+            const inputId = `businessLocationInput${i}`;
+            const label = document.createElement("label");
+            label.htmlFor = inputId;
+            label.textContent = `Business Location ${i}:`;
+            const input = document.createElement("input");
+            input.type = "text";
+            input.id = inputId;
+            input.placeholder = `Enter Business Location ${i}`;
+            container.appendChild(label);
+            container.appendChild(input);
+          }
+        });
+
+      document
+        .getElementById("myButton")
+        .addEventListener("click", async function () {
+          const username = document.getElementById("usernameInput").value;
+          const password = document.getElementById("passwordInput").value;
+          const count = parseInt(
+            document.getElementById("businessLocationCountInput").value,
+            10
+          );
+          const businessLocationIds = [];
+
+          for (let i = 1; i <= count; i++) {
+            const inputId = `businessLocationInput${i}`;
+            const businessLocationId = document.getElementById(inputId).value;
+            businessLocationIds.push(businessLocationId);
+          }
+
+          const response = await fetch(
+            `/scrape?username=${encodeURIComponent(
+              username
+            )}&password=${encodeURIComponent(
+              password
+            )}&businessLocationIds=${encodeURIComponent(
+              businessLocationIds.join(",")
+            )}`
+          );
+          const message = await response.text();
+          alert(message);
+        });
+    </script>
+  </body>
+</html>
