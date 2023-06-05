@@ -1,101 +1,64 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Button Click Example</title>
+    <title>NoRival oData exctractor</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <form id="form">
-      <label for="usernameInput">Username:</label>
-      <input
-        type="text"
-        id="usernameInput"
-        name="username"
-        required
-      /><br /><br />
+    <div class="form-container">
+      <div class="container">
+        <form id="form">
+          <input
+            type="text"
+            id="usernameInput"
+            placeholder="Enter your username"
+            required
+          />
+          <br />
 
-      <label for="passwordInput">Password:</label>
-      <input
-        type="password"
-        id="passwordInput"
-        name="password"
-        required
-      /><br /><br />
+          <input
+            type="password"
+            id="passwordInput"
+            placeholder="Enter your password"
+            required
+          />
+          <br />
+          <div
+            id="businessLocationsContainerOutsideModal"
+            class="businessLocationContainer"
+          ></div>
+          <button id="enterMoreLocationsButton" type="button">
+            Enter more locations
+          </button>
+          <br />
+          <input class="form-submit-button" type="submit" value="Submit" />
 
-      <label for="businessLocationCountInput"
-        >Number of business locations:</label
-      >
-      <input
-        type="number"
-        id="businessLocationCountInput"
-        min="1"
-        placeholder="Enter number of locations"
-        required
-      /><br /><br />
+          <a id="downloadButton" style="display: none">Download</a>
+        </form>
+      </div>
+    </div>
+    <div id="businessLocationsModal" class="modal">
+      <div class="modal-content">
+        <span id="closeModal" style="cursor: pointer">&times;</span>
+        <h3>Enter Business Locations IDs</h3>
+        <h5>Here you can enter up to 100 Business Locations IDs</h5>
+        <br></br>
+        <div
+          id="businessLocationsContainerInsideModal"
+          class="businessLocationContainer"
+        ></div>
+        <br></br>
+        <button
+          id="modalSubmitButton"
+          class="modal-submit-button"
+          type="button"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
 
-      <div id="businessLocationsContainer"></div>
-      <button id="myButton">Click me</button>
-    </form>
-    <script type="text/javascript" src="./xlsx.core.min.js"></script>
-
-    <script>
-      document
-        .getElementById("businessLocationCountInput")
-        .addEventListener("input", function () {
-          const count = parseInt(
-            document.getElementById("businessLocationCountInput").value,
-            10
-          );
-          const container = document.getElementById(
-            "businessLocationsContainer"
-          );
-
-          // Clear previous inputs
-          container.innerHTML = "";
-
-          // Generate new inputs
-          for (let i = 1; i <= count; i++) {
-            const inputId = `businessLocationInput${i}`;
-            const label = document.createElement("label");
-            label.htmlFor = inputId;
-            label.textContent = `Business Location ${i}:`;
-            const input = document.createElement("input");
-            input.type = "text";
-            input.id = inputId;
-            input.placeholder = `Enter Business Location ${i}`;
-            container.appendChild(label);
-            container.appendChild(input);
-          }
-        });
-
-      document
-        .getElementById("myButton")
-        .addEventListener("click", async function () {
-          const username = document.getElementById("usernameInput").value;
-          const password = document.getElementById("passwordInput").value;
-          const count = parseInt(
-            document.getElementById("businessLocationCountInput").value,
-            10
-          );
-          const businessLocationIds = [];
-
-          for (let i = 1; i <= count; i++) {
-            const inputId = `businessLocationInput${i}`;
-            const businessLocationId = document.getElementById(inputId).value;
-            businessLocationIds.push(businessLocationId);
-          }
-
-          const response = await fetch(
-            `/scrape?username=${encodeURIComponent(
-              username
-            )}&password=${encodeURIComponent(
-              password
-            )}&businessLocationIds=${encodeURIComponent(
-              businessLocationIds.join(",")
-            )}`
-          );
-          const message = await response.text();
-          alert(message);
-        });
-    </script>
+    <script src="/FileSaver.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

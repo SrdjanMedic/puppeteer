@@ -1,0 +1,163 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-image: url("Background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+#form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 15px;
+  padding: 30px 50px;
+  box-shadow: 6px 10px 55px -40px #0c0d0f;
+  margin: 0 auto;
+}
+
+input {
+  margin-bottom: 20px;
+  padding: 14px;
+  width: 80%;
+  border-radius: 10px;
+  border: 1px;
+  font-size: 15px;
+}
+
+#form button,
+.form-submit-button {
+  padding: 14px 25px;
+  background-color: #0984e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+#businessLocationsContainerOutsideModal {
+  display: contents;
+}
+
+.modal input {
+  width: auto;
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  text-align: center;
+  position: relative;
+}
+
+.modal h3 {
+  margin-bottom: 30px;
+}
+
+#closeModal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+#businessLocationsContainerInsideModal {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 10px;
+}
+
+#businessLocationsContainerInsideModal input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+  border: 0.5px solid #5b5b5b26;
+}
+
+#businessLocationsContainerInsideModal > div:nth-child(7n + 1) {
+  grid-column: span 6;
+}
+
+.modal-content input {
+  flex: 1 0 auto;
+  margin-right: 10px;
+}
+
+.modal-submit-button {
+  /* Copy the styles from .form-submit-button */
+  padding: 14px 25px;
+  background-color: #0984e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.container {
+  text-align: center;
+  max-width: 1980px;
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+#businessLocationsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 10px;
+}
+
+#businessLocationsContainer label {
+  display: block;
+}
+#businessLocationsContainer input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+.businessLocation {
+  padding-right: 10px;
+}
+
+.businessLocationOutsideModal {
+  display: block;
+}
