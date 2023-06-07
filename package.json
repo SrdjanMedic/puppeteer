@@ -7,6 +7,8 @@
     "express-zip": "^3.0.0",
     "fs": "^0.0.1-security",
     "json-to-csv-stream": "^1.1.0",
+    "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0",
     "path": "^0.12.7",
     "puppeteer": "^20.2.1",
     "xlsx": "^0.18.5"
